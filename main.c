@@ -2,198 +2,209 @@
 #include <stdlib.h>
 #include <string.h>
 
-//¶¨Òå×´Ì¬Âë
+// å®šä¹‰çŠ¶æ€ç 
 #define OK 1
 #define ERROR 0
 
-//¶¨Òåµ¥Á´±í
-typedef struct book
-{
+// å®šä¹‰å•é“¾è¡¨
+typedef struct book {
     char name[50];
     char title[500];
     double time;
     struct book* next;
-}book,*Linkbook;
+} book, *Linkbook;
 
-//ÉùÃ÷º¯Êı
-Linkbook qvZhi(Linkbook L, int i);//È¡Î»ÖÃiµÄ½áµã£¨·µ»ØÖ¸Õë£©
-Linkbook creatList(void);//´´½¨µ¥Á´±í
-Linkbook Listlnit(Linkbook L,int n);//°Ñµ¥Á´±íÉÏÁ´½Ón¸ö½áµã¹¦ÄÜ(Ç°²å)
-Linkbook lnitList(Linkbook L,int n);//°Ñµ¥Á´±íÉÏÁ´½Ón¸ö½áµã¹¦ÄÜ(ºó²å)
-void printList(Linkbook L);//´òÓ¡Á´±í(²»Êä³öÍ·½Úµã)
-int chazhao(char* name,char* title,Linkbook L);//¸øÖµ²éÕÒ(Ãû×Ö,±êÌâ,·µ»ØÎ»ÖÃ,ÕÒ²»µ½Í·½áµã)
-int insertpoint(Linkbook L, int i);//¶¨Òå²åÈë½Úµã¹¦ÄÜ
-int deletepoint(Linkbook L, int i);//¶¨ÒåÉ¾³ı½Úµã¹¦ÄÜ
-int IfVoid(Linkbook L);//¶¨ÒåÅĞ¶Ïµ¥Á´±íÊÇ·ñÎª¿Õ¹¦ÄÜ
-int destoryList(Linkbook L);//¶¨ÒåÏú»Ùµ¥Á´±í¹¦ÄÜ
-int ClearList(Linkbook L);//¶¨ÒåÇå¿Õµ¥Á´±í¹¦ÄÜ
-int lenlist(Linkbook L);//¶¨ÒåÇóµ¥Á´±í³¤¶È¹¦ÄÜ(²»°üÀ¨Í·½áµã)
+// å£°æ˜å‡½æ•°
+Linkbook qvZhi(Linkbook L, int i);                     // å–ä½ç½® i çš„ç»“ç‚¹ï¼ˆè¿”å›æŒ‡é’ˆï¼‰
+Linkbook creatList(void);                              // åˆ›å»ºå•é“¾è¡¨ï¼ˆå¤´ç»“ç‚¹ï¼‰
+Linkbook Listlnit(Linkbook L, int n);                 // å‰æ’ n ä¸ªç»“ç‚¹
+Linkbook lnitList(Linkbook L, int n);                 // åæ’ n ä¸ªç»“ç‚¹
+void printList(Linkbook L);                            // æ‰“å°é“¾è¡¨ï¼ˆä¸è¾“å‡ºå¤´èŠ‚ç‚¹ï¼‰
+int chazhao(char* name, char* title, Linkbook L);     // ç»™å€¼æŸ¥æ‰¾ï¼ˆåå­—, æ ‡é¢˜ï¼Œè¿”å›ä½ç½®ï¼Œæ‰¾ä¸åˆ°è¿”å› ERRORï¼‰
+int insertpoint(Linkbook L, int i);                   // æ’å…¥èŠ‚ç‚¹
+int deletepoint(Linkbook L, int i);                   // åˆ é™¤èŠ‚ç‚¹
+int IfVoid(Linkbook L);                                // åˆ¤æ–­é“¾è¡¨æ˜¯å¦ä¸ºç©º
+int destoryList(Linkbook L);                           // é”€æ¯é“¾è¡¨
+int ClearList(Linkbook L);                             // æ¸…ç©ºé“¾è¡¨ï¼ˆä¿ç•™å¤´ç»“ç‚¹ï¼‰
+int lenlist(Linkbook L);                               // æ±‚é“¾è¡¨é•¿åº¦ï¼ˆä¸åŒ…æ‹¬å¤´ç»“ç‚¹ï¼‰
 
-//Ö÷º¯Êı
-int main(){
-    //´´½¨Á´±í
+// ä¸»å‡½æ•°
+int main() {
+    // åˆ›å»ºå¹¶åˆå§‹åŒ–é“¾è¡¨ï¼ˆå¤´ç»“ç‚¹ï¼‰
     Linkbook a = creatList();
-    //³õÊ¼»¯Á´±í£¬Ìí¼Ó2¸ö½áµã
-    a = lnitList(a,2);
-    
-    strcpy(qvZhi(a,2)->name,"hello world");
-    qvZhi(a,2)->time = 3.14;
-    strcpy(qvZhi(a,2)->title,"mengbaijiang");
-    
-    //a = lnitList(a,2);//ºó²å2¸ö
-    
-    a = Listlnit(a,3);//Ç°²å3¸ö
+    a = lnitList(a, 2); // åæ’ 2 ä¸ªèŠ‚ç‚¹
+
+    strcpy(qvZhi(a, 2)->name, "hello world");
+    qvZhi(a, 2)->time = 3.14;
+    strcpy(qvZhi(a, 2)->title, "mengbaijiang");
+
+    a = Listlnit(a, 3); // å‰æ’ 3 ä¸ªèŠ‚ç‚¹
     printList(a);
-    // printList(a);
-    //³¤¶È
-    printf("Á´±í³¤¶ÈÎª£º%d\n",lenlist(a));
-    //²éÕÒ
+
+    // é•¿åº¦
+    printf("é“¾è¡¨é•¿åº¦ä¸ºï¼š%d\n", lenlist(a));
+
+    // æŸ¥æ‰¾
     int pos = chazhao("hello world", "", a);
-    if(pos) {printf("²éÕÒµ½µÄÎ»ÖÃÎª£º%d\n",pos);
-    printf("%s\n", qvZhi(a,pos)->title);}
-    else printf("Î´²éÕÒµ½¸Ã½áµã\n");
-    //²åÈë½Úµã
-    insertpoint(a,3);
+    if (pos) {
+        printf("æŸ¥æ‰¾åˆ°çš„ä½ç½®ä¸ºï¼š%d\n", pos);
+        printf("%s\n", qvZhi(a, pos)->title);
+    } else {
+        printf("æœªæŸ¥æ‰¾åˆ°è¯¥ç»“ç‚¹\n");
+    }
+
+    // æ’å…¥èŠ‚ç‚¹ï¼ˆåœ¨ä½ç½® 3 å‰æ’ä¸€ä¸ªæ–°èŠ‚ç‚¹ï¼‰
+    insertpoint(a, 3);
     printList(a);
-    //Çå¿ÕÁ´±í
+
+    // é”€æ¯é“¾è¡¨
     destoryList(a);
     return 0;
 }
 
-//¶¨Òå´´½¨µ¥Á´±í¹¦ÄÜ
-Linkbook creatList(void){
+// åˆ›å»ºå•é“¾è¡¨ï¼ˆå¤´ç»“ç‚¹ï¼‰
+Linkbook creatList(void) {
     Linkbook L = (Linkbook)malloc(sizeof(book));
-    if (!L) return ERROR;  
-    strcpy(L -> name, "name");
-    strcpy(L -> title, "title");
-    L -> time = 0.0;
-    L -> next = NULL;
+    if (!L) return NULL;
+    strcpy(L->name, "name");
+    strcpy(L->title, "title");
+    L->time = 0.0;
+    L->next = NULL;
     return L;
 }
-//°Ñµ¥Á´±íÉÏÁ´½Ón¸ö½áµã¹¦ÄÜ(ºó²å)
-Linkbook lnitList(Linkbook L,int n){
+
+// åæ’ n ä¸ªèŠ‚ç‚¹
+Linkbook lnitList(Linkbook L, int n) {
     Linkbook p = L;
-    while (p){p = p->next;}
-    for(int i = 0; i < n; i++){
-        p ->next = creatList();
-        p = p -> next;
+    // éå†åˆ°æœ€åä¸€ä¸ªèŠ‚ç‚¹ï¼ˆp->next == NULLï¼‰
+    while (p->next) { p = p->next; }
+    for (int i = 0; i < n; i++) {
+        p->next = creatList();
+        p = p->next;
     }
     return L;
 }
-//°Ñµ¥Á´±íÉÏÁ´½Ón¸ö½áµã¹¦ÄÜ(Ç°²å)
-Linkbook Listlnit(Linkbook L,int n){
-    for(int i = 0;i<n;i++){
+
+// å‰æ’ n ä¸ªèŠ‚ç‚¹
+Linkbook Listlnit(Linkbook L, int n) {
+    for (int i = 0; i < n; i++) {
         Linkbook s = creatList();
-        s -> next = L -> next;
-        L -> next = s;
+        s->next = L->next;
+        L->next = s;
     }
     return L;
 }
-//¶¨Òå²åÈë½Úµã¹¦ÄÜ
- int insertpoint(Linkbook L, int i){
-    //ÈÃÇ°Ò»Î»µÄÖ¸ÕëÖ¸ÏòĞÂ½Úµã
-    Linkbook p = qvZhi(L,i - 1);
-    if(!p) {
-        printf("²åÈëÎ»ÖÃ²»ºÏ·¨\n");
+
+// æ’å…¥èŠ‚ç‚¹ï¼ˆåœ¨ç¬¬ i ä¸ªä½ç½®æ’å…¥æ–°èŠ‚ç‚¹ï¼Œi ä» 1 å¼€å§‹ï¼Œæ’åˆ°æœ«å°¾å¯ç”¨ len+1ï¼‰
+int insertpoint(Linkbook L, int i) {
+    Linkbook p = qvZhi(L, i - 1);
+    if (!p) {
+        printf("æ’å…¥ä½ç½®ä¸åˆæ³•\n");
         return ERROR;
     }
     Linkbook s = creatList();
-    s -> next = p -> next;//Ë³Ğò²»¿É»¥»»
-    p -> next = s; 
+    s->next = p->next; // é¡ºåºä¸å¯äº’æ¢
+    p->next = s;
     return OK;
 }
-//¶¨ÒåÉ¾³ı½Úµã¹¦ÄÜ
-int deletepoint(Linkbook L, int i){
-    //ÈÃÇ°Ò»Î»µÄÖ¸ÕëÖ¸ÏòºóÒ»Î»
-    Linkbook p = qvZhi(L,i - 1);
-    if(!p) {
-        printf("É¾³ıÎ»ÖÃ²»ºÏ·¨\n");
+
+// åˆ é™¤ç¬¬ i ä¸ªèŠ‚ç‚¹
+int deletepoint(Linkbook L, int i) {
+    Linkbook p = qvZhi(L, i - 1);
+    if (!p) {
+        printf("åˆ é™¤ä½ç½®ä¸åˆæ³•\n");
         return ERROR;
     }
-    Linkbook q = p -> next;
-    if(!q){
-        printf("É¾³ıÎ»ÖÃ²»ºÏ·¨\n");
+    Linkbook q = p->next;
+    if (!q) {
+        printf("åˆ é™¤ä½ç½®ä¸åˆæ³•\n");
         return ERROR;
     }
-    p -> next = q -> next;
+    p->next = q->next;
     free(q);
     return OK;
 }
-//¶¨ÒåÅĞ¶Ïµ¥Á´±íÊÇ·ñÎª¿Õ¹¦ÄÜ
-int IfVoid(Linkbook L){
-    if(L -> next == NULL)
+
+// åˆ¤æ–­é“¾è¡¨æ˜¯å¦ä¸ºç©ºï¼ˆå¤´ç»“ç‚¹ä¸ç®—ï¼‰
+int IfVoid(Linkbook L) {
+    if (L->next == NULL)
         return OK;
     else
         return ERROR;
 }
-//¶¨ÒåÏú»Ùµ¥Á´±í¹¦ÄÜ
-int destoryList(Linkbook L){
+
+// é”€æ¯é“¾è¡¨ï¼ˆé‡Šæ”¾åŒ…æ‹¬å¤´ç»“ç‚¹ï¼‰
+int destoryList(Linkbook L) {
     Linkbook p;
-    while(L)
-    {
+    while (L) {
         p = L;
-        L = L -> next;
+        L = L->next;
         free(p);
     }
     return OK;
 }
-//¶¨ÒåÇå¿Õµ¥Á´±í¹¦ÄÜ
-int ClearList(Linkbook L){
-    Linkbook p,q;
-    p = L -> next;
-    while(p){
+
+// æ¸…ç©ºé“¾è¡¨ï¼ˆé‡Šæ”¾æ‰€æœ‰éå¤´ç»“ç‚¹ï¼Œä¿ç•™å¤´ç»“ç‚¹ï¼‰
+int ClearList(Linkbook L) {
+    Linkbook p, q;
+    p = L->next;
+    while (p) {
         q = p;
-        p = p -> next;
+        p = p->next;
         free(q);
     }
-    L -> next = NULL;
+    L->next = NULL;
     return OK;
 }
-//¶¨ÒåÇóµ¥Á´±í³¤¶È¹¦ÄÜ(²»°üÀ¨Í·½áµã)
-int lenlist(Linkbook L){
+
+// è®¡ç®—é“¾è¡¨é•¿åº¦ï¼ˆä¸åŒ…æ‹¬å¤´ç»“ç‚¹ï¼‰
+int lenlist(Linkbook L) {
     int i = 0;
-    Linkbook p = L -> next;
-    while(p){
+    Linkbook p = L->next;
+    while (p) {
         i++;
-        p = p -> next;
+        p = p->next;
     }
     return i;
 }
 
-//È¡Î»ÖÃiµÄ½áµã£¨·µ»ØÖ¸Õë£©
-Linkbook qvZhi(Linkbook L, int i){
-    if(i == 0) return L;
+// å–ä½ç½® i çš„ç»“ç‚¹ï¼ˆè¿”å›æŒ‡é’ˆï¼Œi=0 è¿”å›å¤´ç»“ç‚¹ï¼‰
+Linkbook qvZhi(Linkbook L, int i) {
+    if (i == 0) return L;
     int j = 1;
     int len = lenlist(L);
-    if(i < 1 || i > len){
-        printf("Î»ÖÃ²»ºÏ·¨\n");
+    if (i < 1 || i > len) {
+        printf("ä½ç½®ä¸åˆæ³•\n");
         return NULL;
     }
-    Linkbook p = L -> next;
-    while(p && j < i){
-        p = p -> next;
+    Linkbook p = L->next;
+    while (p && j < i) {
+        p = p->next;
         j++;
     }
     return p;
 }
-//¸øÖµ²éÕÒ(Ãû×Ö,±êÌâ,·µ»ØÎ»ÖÃ,ÕÒ²»µ½Í·½áµã)
-int chazhao(char* name,char* title,Linkbook L){
-    Linkbook p = L -> next;
+
+// ç»™å€¼æŸ¥æ‰¾ï¼ˆæŒ‰ name æˆ– title æŸ¥æ‰¾ï¼Œä¼ å…¥ç©ºå­—ç¬¦ä¸²è¡¨ç¤ºä¸æ¯”è¾ƒè¯¥å­—æ®µï¼‰
+int chazhao(char* name, char* title, Linkbook L) {
+    Linkbook p = L->next;
     int i = 1;
-    while(p){
-        if(strcmp(p -> name, name) == 0||strcmp(p -> title, title) == 0)
+    while (p) {
+        if ((name != NULL && name[0] != '\0' && strcmp(p->name, name) == 0) ||
+            (title != NULL && title[0] != '\0' && strcmp(p->title, title) == 0)) {
             return i;
-            break;
-        p = p -> next;
+        }
+        p = p->next;
         i++;
-    if(!p) return ERROR;
     }
+    return ERROR;
 }
-//´òÓ¡Á´±í
-void printList(Linkbook L){
-    Linkbook p = L -> next;
-    while(p){
-        printf("name:%-15s title:%-15s time:%-15lf\n",p -> name,p -> title,p -> time);
-        p = p -> next;
+
+// æ‰“å°é“¾è¡¨
+void printList(Linkbook L) {
+    Linkbook p = L->next;
+    while (p) {
+        printf("name:%-15s title:%-15s time:%-15lf\n", p->name, p->title, p->time);
+        p = p->next;
     }
 }
